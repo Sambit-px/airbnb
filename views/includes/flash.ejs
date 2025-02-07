@@ -1,0 +1,14 @@
+<% if(success && success.length){ %> <!-- we add an extra condition SUCCESS.LENGTH as success is an array and can be empty but array will exist hence the alert will appear even as empty hwever to discard the alert fom screen once it appears we add this condition -->
+    <div class="alert alert-success alert-diamissible fade show col-6 offset-3" role="alert">
+        <%= success %> <!-- Success stores a message in routes/lisitng.js and is called using flash via app.js -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<% if(error && error.length){ %> <!-- we add an extra condition error.LENGTH as error is an array and can be empty but array will exist hence the alert will appear even as empty hwever to discard the alert fom screen once it appears we add this condition -->
+    <div class="alert alert-danger alert-diamissible fade show col-6 offset-3" role="alert">
+        <%= error %> <!-- error stores a message in routes/lisitng.js and is called using flash via app.js -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
