@@ -18,37 +18,49 @@ const listingSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref:"Review",
-    }
+      ref: "Review",
+    },
   ],
   owner: {
     type: Schema.Types.ObjectId,
-    ref:"User",
+    ref: "User",
   },
-  geometry: { //search geojson mongoose for further info
+  geometry: {
     type: {
-      type: String, // Don't do `{ location: { type: String } }`
-      enum: ['Point'], // 'location.type' must be 'Point'
-      required: true
+      type: String,
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
     },
     coordinates: {
       type: [Number],
-      required: true
+      required: true,
     },
-    categories: {
-      type: [String],  // Array to store multiple categories
-      enum: ['Trending','Rooms','Iconic Cities','Mountains','Castles','Amazing Pools','Camping','Farms','Arctic','Domes','Boats'], // Enum to restrict categories to a specific list
-      required: true
-    }
-  }
+  },
+  categories: {  // <-- Move categories out of geometry
+    type: [String],  // Array to store multiple categories
+    enum: [
+      "Trending",
+      "Rooms",
+      "Iconic Cities",
+      "Mountains",
+      "Castles",
+      "Amazing Pools",
+      "Camping",
+      "Farms",
+      "Arctic",
+      "Domes",
+      "Boats",
+    ], // Enum to restrict categories to a specific list
+    required: true,
+  },
 });
 
-/*The findOneAndDelete is triggered when the delete route in app.js is triggered*/
-listingSchema.post("findOneAndDelete" , async(listing) => {   /*Mongoose registers updateOne middleware on Query.prototype.updateOne() by default. This means that both doc.updateOne() and Model.updateOne() trigger updateOne hooks, but this refers to a query, not a document. To register updateOne middleware as document middleware, use schema.pre('updateOne', { document: true, query: false }).*/    
-  if(listing){
-    await Review.deleteMany({_id: {$in: listing.reviews}}); 
+// Remove related reviews when listing is deleted
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
-})
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
