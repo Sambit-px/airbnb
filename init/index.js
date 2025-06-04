@@ -1,12 +1,14 @@
 require("dotenv").config({ path: "../.env" });
 
-
 const mongoose = require("mongoose");
 const initData = require("./data.js"); /* ./ -> current directory */
 const Listing = require("../models/listing.js"); /* ../ -> parent directoy */
 
 const mongo_url = process.env.ATLASDB_URL;
-console.log("Mongo URL:", mongo_url);
+const owner_id1 = "682d612bb8339304cd84525e"; //from mongoDB
+const owner_id2 = "67e006af800d9a3a4938942a"; //from mongo atlas
+
+const owner_id = owner_id1 || owner_id2;
 
 
 main()
