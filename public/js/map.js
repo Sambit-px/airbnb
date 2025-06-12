@@ -18,9 +18,9 @@ const marker = new mapboxgl.Marker({
 // Function to create the custom Airbnb-style marker
 function createAirbnbStyleMarker() {
   const element = document.createElement('div');
-  
+
   // Style the div to create the circular marker like Airbnb's
-  element.className = 'airbnb-marker'; 
+  element.className = 'airbnb-marker';
   element.style.width = '70px'; // Size of the marker
   element.style.height = '70px';
   element.style.borderRadius = '50%'; // Circular background
@@ -31,14 +31,14 @@ function createAirbnbStyleMarker() {
   element.style.position = 'relative';
   element.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
   element.style.cursor = 'pointer';
-  
+
   // Create the Material Icon for the home icon
   const icon = document.createElement('span');
   icon.className = 'material-icons';  // Class for Google Material Icons
   icon.innerHTML = 'home';  // Use the 'home' icon
   icon.style.fontSize = '36px';  // Icon size
   icon.style.color = 'white';  // White icon color
-  
+
   element.appendChild(icon);
 
   // Add the "pin" triangle at the bottom (for the tail of the marker)

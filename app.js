@@ -3,8 +3,8 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const mapToken = process.env.MAP_TOKEN;
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding'); //https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services.md#forwardgeocode
+const geocodingClient = mbxGeocoding({ accessToken: mapToken }); // you can read the documentation by visting here https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services.md
 
 
 const express = require("express");
