@@ -62,3 +62,10 @@ module.exports.validateReview = (req,res,next) => {
     }
 };
 
+module.exports.validateBooking = (req,res,next) => {
+    let {startDate, endDate} = req.body;
+    if(!startDate || !endDate){
+      throw new ExpressError(400 , "Start date and end date are required");
+    }
+    next();
+}

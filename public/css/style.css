@@ -9,10 +9,18 @@ body{
     flex: 1; /*flex-grow*/
   }
 
+
 /*navbar*/
 .navbar{
     height:5rem;
     background-color: white;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
 }
 
 /*compass icon*/
@@ -105,6 +113,23 @@ body{
     border: none !important;
 }
 
+.book-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+    margin-left: 1rem;
+    
+}
+
+.checkin-btn {
+    background-color: #d9d3d4 !important;
+    margin-right: 0.5rem;
+    
+}
+
+.checkout-btn {
+    background-color: #d9d3d4 !important;
+    
+}
 /*show.ejs*/
 .show-img{
     height:30vh;
@@ -112,6 +137,26 @@ body{
 
 .btns{
     display: flex;
+}
+
+.booking{
+    margin-top: 1rem;
+}
+
+.description{
+    margin-bottom: 0.5rem;
+}
+
+.price{
+    margin-bottom: 0.5rem;    
+}
+
+.location{
+    margin-bottom: 0.5rem;
+}
+
+.country{
+    margin-bottom: 0.5rem;
 }
 
 .show-card{
@@ -140,7 +185,7 @@ body{
 
 /*searach button in navbar*/
 .search-btn{
-    background-color: #fe424d;
+    background-color: rgb(254, 66, 77);
     color: #fff;
     border-radius: 25px;
     padding: 0 1rem 0 1rem;

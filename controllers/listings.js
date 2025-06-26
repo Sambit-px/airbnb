@@ -52,6 +52,11 @@ module.exports.createListing = async (req, res, next) => {
   res.redirect("/listings");
 };
 
+module.exports.myListings = async (req, res) => {
+  const allListings = await Listing.find({}).populate("owner");;
+  res.render("listings/myListing.ejs", { allListings , currUser: req.user});
+};
+
 module.exports.renderEditForm = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
@@ -87,7 +92,6 @@ module.exports.destroyListing = async (req, res) => {
   req.flash("success", "Listing Deleted:");
   res.redirect("/listings");
 };
-
 
 // Function to filter listings by category
 module.exports.filterByCategory = async (req, res) => {

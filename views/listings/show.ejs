@@ -14,31 +14,67 @@
       <div class="card col-6 offset-3 show-card listing-card">
         <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
         <div class="card-body">
-          <p class="card-text">Owned by: <i>
+          <p class="card-text">Owned by: <i> 
               <%= listing.owner.username %>
             </i></p>
-          <p>
+          <p class="description">
             <%= listing.description %>
           </p>
-          <p>&#8377;<%= listing.price.toLocaleString("en-IN") %>
+          <p class="price">Price: <b>&#8377;<%= listing.price.toLocaleString("en-IN") %></b> / night
           </p> <!-- "&#8377" is the html entity code for rupee in html -->
-          <p>
-            <%= listing.location %>
+          <p class="location">
+            Location: <%= listing.location %>
           </p>
-          <div>
-            <%= listing.country %>
+          <div class="country">
+            Country: <%= listing.country %>
           </div>
         </div>
-      </div>
+        <div class="booking">
+          <% if(currUser && listing.owner._id.toString() !== currUser._id.toString()) { %>
+            <div class="btns">
 
-      <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
-        <div class="btns">
-          <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-3 edit-btn">Edit</a>
-          <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-            <button class="btn btn-dark offset-3">Delete</button>
-          </form>
+              <form action="/listings/<%= listing._id %>/booking" method="POST" class="d-flex align-items-center gap-2">
+                <input type="text" id="checkin" name="startDate" placeholder="Check-in" class="btn rounded-pill px-3 py-1 checkin-btn" readonly
+                  required style="font-size: 0.9rem;">
+                <input type="text" id="checkout" name="endDate" placeholder="Check-out" class="btn rounded-pill px-3 py-1 checkout-btn" readonly
+                  required style="font-size: 0.9rem;">
+                <button type="submit" class="btn rounded-pill btn-dark book-btn">Book Now</button>
+              </form>
+          
+              <script>
+                const checkout = flatpickr("#checkout", {
+                  minDate: "today",
+                  dateFormat: "Y-m-d"
+                });
+
+                const checkin = flatpickr("#checkin", {
+                  minDate: "today",
+                  dateFormat: "Y-m-d",
+                  onChange: function (selectedDates) {
+                    if (selectedDates.length > 0) {
+                      const minCheckout = new Date(selectedDates[0]);
+                      minCheckout.setDate(minCheckout.getDate() + 1);
+
+                      checkout.set("minDate", minCheckout);
+                      checkout.setDate(minCheckout, true);
+                    }
+                  }
+                });
+              </script>
+            </div>
+            <% } %>
+            <div class="listing-buttons">
+              <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+                <div class="btns">
+                  <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark edit-btn">Edit</a>
+                  <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+                    <button class="btn btn-dark offset-3">Delete</button>
+                  </form>
+                </div>
+                <% } %>
+            </div>
+          </div>
         </div>
-        <% } %>
 
 
           <br>

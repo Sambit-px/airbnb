@@ -23,7 +23,9 @@ const User = require("./models/user.js");
 
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
-const userRouter = require("./routes/user.js")
+const userRouter = require("./routes/user.js");
+const bookingRouter = require("./routes/booking.js");
+
 
 //const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
@@ -108,7 +110,7 @@ app.use((req, res, next) => {
 app.use("/listings", listingsRouter); /*connected to listing.js in routes folder*/
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
-
+app.use("/", bookingRouter);
 
 
 // app.get("/testListing", async(req,res)=> {

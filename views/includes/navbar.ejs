@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
@@ -6,6 +7,7 @@
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
@@ -19,16 +21,53 @@
         </form>
       </div>
 
-      <div class="navbar-nav ms-auto">
+      <div class="d-flex align-items-center ms-auto navbar-right" style="gap: 1rem;">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
-        <% if(!currUser){ %><!-- if user is not logged in then signup and login is displayed and logout is excluded-->
-          <a class="nav-link" href="/signup"><b>Sign up</b></a>
-          <a class="nav-link" href="/login"><b>Login</b></a>
-          <% } %>
-            <% if(currUser) { %>
-              <a class="nav-link" href="/logout"><b>Logout</b></a>
-              <% } %>
-      </div>
+        <div class="btn_one right-toggle">
+          <label for="check" style="cursor:pointer; margin: 0;">
+            <i class="fa-solid fa-bars fa-lg"></i>
+          </label>
+        </div>
+      </div>      
     </div>
   </div>
 </nav>
+
+<!-- Sidebar Toggle Checkbox -->
+<input type="checkbox" id="check" hidden />
+
+<!-- Sidebar (Slides in from the Right) -->
+<div class="sidebar_menu right-sidebar">
+  <div class="logo">
+    <a href="#">Dashboard</a>
+  </div>
+
+  <div class="btn_two right-close">
+    <label for="check">
+      <i class="fa-solid fa-xmark"></i>
+    </label>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li><i class="fa-solid fa-house"></i><a href="/listings">Home</a></li>
+      <li><i class="fa-solid fa-list"></i><a href="/listings/my">My Listings</a></li>
+      <li><i class="fa-solid fa-calendar-check"></i><a href="/bookings/my">My Bookings</a></li>
+      <% if (currUser) { %>
+        <li><i class="fa-solid fa-right-from-bracket"></i><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><i class="fa-solid fa-user-plus"></i><a href="/signup">Sign Up</a></li>
+          <li><i class="fa-solid fa-right-to-bracket"></i><a href="/login">Login</a></li>
+          <% } %>
+    </ul>
+  </div>
+
+  <div class="social_media">
+    <ul>
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube"></i></a>
+    </ul>
+  </div>
+</div>
